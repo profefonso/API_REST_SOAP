@@ -31,17 +31,25 @@ class NotificationServicesRest(APIView):
         '''
 
         if 'mail_list' in body and 'subject' in body and 'content_html' in body:
-            sendmailnotification = SendMailNotifications()
-            sendmailnotification.send_mail(
-                list_emails=body['mail_list'],
-                subject=body['subject'],
-                content_xml=body['content_html']
-            )
 
-            return Response(
-                    {'data': {'mail': 'OK'}},
-                    status=status.HTTP_200_OK
+            try:
+                sendmailnotification = SendMailNotifications()
+                sendmailnotification.send_mail(
+                    list_emails=body['mail_list'],
+                    subject=body['subject'],
+                    content_xml=body['content_html']
                 )
+
+                return Response(
+                        {'data': {'mail': 'OK'}},
+                        status=status.HTTP_200_OK
+                    )
+            except:
+                return Response(
+                    {'data': {'error': 'Message Don´t Send'}},
+                    status=status.HTTP_500_INTERNAL_SERVER_ERROR
+                )
+
         else:
             return Response(
                 {'message': 'invalid message'},
