@@ -178,4 +178,4 @@ class Infraction(models.Model):
     )
 
     def __str__(self):
-        return str(self.date) + ' - ' + self.municipality.name
+        return str(self.date_created) + ' - ' + str(self.id)

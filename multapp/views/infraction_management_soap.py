@@ -20,7 +20,6 @@ class InfractionComplex(ComplexModel):
     date = DateTime
     road_type = String
     road_name = String
-    municipality = Integer
     location = String
     plate = String
     infraction_code = String
